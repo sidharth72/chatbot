@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8" async defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="container">
+<h3 class=" text-center">Welcome to interview session</h3>
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>Recent</h4>
+            </div>
+            <div class="srch_bar">
+              <div class="stylish-input-group">
+                <input type="text" class="search-bar"  placeholder="Search" >
+                <span class="input-group-addon">
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+            </div>
+          </div>
+
+          <div class="inbox_chat">
+
+
+            <p id='side-view'></p>
+                  
+       
+
+           
+      </div>
+        </div>
+
+        <div class="mesgs">
+          <div class="msg_history">
+            <div class="type_msg">
+            <div class="input_msg_write">
+              <form id="post-form" action='/index' method='post'>
+                {% csrf_token %}
+              <input id='inputbox' type="text" name="textfield" class="write_msg" placeholder="Type a message" />
+              <button id='send-btn' class="msg_send_btn" type='submit' type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+            </form>
+            </div>
+          </div>
+            <br><br>
+            <div id="initial-msg" class="incoming_msg">
+              <div class="incoming_msg_img"> 
+                <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
+              </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>Hello! What's your name?</p>
+                  <span class="time_date"> 11:01 AM | June 9</span>
+                </div>
+              </div>
+            </div>
+
+            <p id='resptext'></p>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<script>
+
+  $(document).on('submit', "#post-form",function(e){
+    e.preventDefault();
+
+    let value = $('#inputbox').val();
+
+   $.ajax({
+
+      type:'POST',
+      url:"/index",
+      data:{
+        textfield: value,
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        action:'post'
+      },
+      dataType:'json',
+      success:function(json){
+
+        $('#resptext').prepend('<div class="incoming_msg"><div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="received_msg"><div class="received_withd_msg"><p>'+ json.resp +'</p><span class="time_date"> 11:01 AM | June 9</span></div></div></div>  <div class="outgoing_msg"><div class="sent_msg"><p>'+ json.req +'</p><span class="time_date"> 11:01 AM    |    June 9</span> </div> </div>');
+
+        $('#side-view').prepend('<div class="chat_list active_chat"><div class="chat_people"><div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="chat_ib"><h5>You:<span class="chat_date">Dec 25</span></h5><p id="side-view">'+ json.req +'</p></div></div></div> <div class="chat_list"><div class="chat_people"><div class="chat_img"> <img src="{% static "img/bot.png" %}" alt="bot"> </div><div class="chat_ib"><h5>Interview Bot:<span class="chat_date">Dec 25</span></h5><p>'+ json.resp +'</p></div></div></div>');
+
+      }
+
+   
+   });
+
+  });
+  $(document).ready(function(){
+    $('#send-btn').click(function(){
+      $('#initial-msg').hide();
+    });
+
+  });
+
+</script>
+
+</body>
+</html>

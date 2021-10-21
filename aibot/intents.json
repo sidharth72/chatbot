@@ -1,0 +1,37 @@
+{"intents": [
+        {"tag": "greeting",
+         "patterns": ["Hi there", "How are you", "Is anyone there?","Hey","Hola", "Hello", "Good day"],
+         "responses": ["Hello, Whats your name?", "Hi, Your name please", "Hi there, What's your good name?"],
+         "context": [""]
+        },
+        {"tag": "goodbye",
+         "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+         "responses": ["See you!", "Have a nice day", "Bye! Come back again soon."],
+         "context": [""]
+        },
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure"],
+         "context": [""]
+        },
+        {"tag": "noanswer",
+         "patterns": [],
+         "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"],
+         "context": [""]
+        },
+        {"tag": "username",
+        "patterns": ["i'm Brigett", "i'm Brienna", "Iam Breonna", "My name is Bonifacio", "Bj", "My full name is Bianka", "Bettie", "Betsey", "Bernabe", "Becca", "Barak", "Hey there, I'am Bailee", "What's up i'm Awilda", "Aurea", "Aundra", "Argenis", "Argelia", "Aquilla", "Apolonio", "Apolonia", "Andrei", "Anastacio", "Amey", "Amberlynn", "Alon", "Allissa", "Alen", "Alek", "Adrion", "Adnan", "Adelita", "Aaren", "Zulay", "Zenia", "Zackory", "Yanet", "Yamilet", "Winifred", "Wilhelm", "Watson", "Vuong", "Vincenza", "Uri", "Tyronne", "Tylisha", "Tyann", "Trudi", "Traves", "Tomasa", "Tirrell", "Timonthy", "Tiandra", "Tiah", "Thaddius", "Teya", "Terryn", "Terren", "Telicia"],
+         "responses": ["Nice to meet you"],
+         "context": [""]
+        },
+
+        {"tag": "name",
+         "patterns": ["what is your name?","what should I call you?"],
+         "responses": ["I'm Mr.Bot","Hey! I'm Mr. Bot"],
+         "context": [""]
+        }
+
+        
+
+   ]
+}
